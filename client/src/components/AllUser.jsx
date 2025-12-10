@@ -27,7 +27,7 @@ const TBody = styled(TableRow)`
 const AllUser = () => {
   const [users, setUsers] = useState([]);
 
-  const hello = "hello"
+  // const hello = "hello"
 
   useEffect(() => {
     const getAllUsers = async () => {
