@@ -64,7 +64,7 @@ const AddUser = () => {
       </FormControl>
       <FormControl>
         <Button variant="contained" onClick={() => addUserDetails()}>
-          Add User
+          Add New User
         </Button>
       </FormControl>
       {error && (
