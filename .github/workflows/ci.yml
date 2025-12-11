@@ -56,8 +56,20 @@ jobs:
 
       - name: Add EC2 host to known_hosts
         run: |
+          if [ -z "${EC2_HOST}" ]; then
+            echo "ERROR: EC2_HOST is not set. Please configure the secret 'EC2_HOST' in the repository settings.";
+            exit 1;
+          fi
           mkdir -p ~/.ssh
-          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
+          # Try a few times to collect the host key (network/DNS may be slow in CI); do not fail the step if unreachable
+          for i in 1 2 3; do
+            ssh-keyscan -T 5 -H "${EC2_HOST}" >> ~/.ssh/known_hosts 2>/dev/null && break || sleep 2
+          done
+          if ! grep -q "${EC2_HOST}" ~/.ssh/known_hosts; then
+            echo "Warning: could not add ${EC2_HOST} to known_hosts. SSH may still fail later.";
+          else
+            echo "Added ${EC2_HOST} to known_hosts.";
+          fi
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
 
