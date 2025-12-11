@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://13.201.104.162:5000';
+const URL = 'http://13.233.105.146:5000';
 
 export const addUser = (data) => {
   return axios.post(`${URL}/adduser`, data);

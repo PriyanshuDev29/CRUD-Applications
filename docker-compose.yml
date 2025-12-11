@@ -12,7 +12,7 @@ services:
     build:
       context: ./client
       args:
-        REACT_APP_API_URL: http://13.201.104.162:5000/api
+        REACT_APP_API_URL: http://13.233.105.146:5000/api
     container_name: frontend
     restart: always
     ports:
