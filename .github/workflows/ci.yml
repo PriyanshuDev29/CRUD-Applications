@@ -75,14 +75,8 @@ jobs:
 
       - name: Write SSH Key
         run: |
-          if [ -z "${EC2_KEY}" ]; then
-            echo "ERROR: EC2_KEY is not set. Please configure the secret 'EC2_KEY' in the repository settings.";
-            exit 1;
-          fi
-          # Write the private key to a file preserving newlines. Do not print the key itself.
-          printf '%s\\n' "${EC2_KEY}" > ec2_key.pem
+          echo "${EC2_KEY}" > ec2_key.pem
           chmod 600 ec2_key.pem
-          echo "Wrote ec2_key.pem (first line):" && head -n 1 ec2_key.pem
         env:
           EC2_KEY: ${{ secrets.EC2_KEY }}
 
