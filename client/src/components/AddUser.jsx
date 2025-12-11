@@ -49,7 +49,7 @@ const AddUser = () => {
 
   return (
     <Container onKeyDown={(e) => PressedKey(e)}>
-      <Typography variant="h4">Add User</Typography>
+      <Typography variant="h4">Add Users</Typography>
       <FormControl>
         <TextField label="Name" onChange={(e) => onValueChange(e)} name="name" />
       </FormControl>
