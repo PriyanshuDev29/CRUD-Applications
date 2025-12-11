@@ -93,7 +93,7 @@ const AllUser = () => {
                 Edit
               </Button>
               <Button variant="contained" color="secondary" onClick={() => DeleteUser(user.userId)}>
-                Delete
+                Deletes
               </Button>
             </TableCell>
           </TBody>
