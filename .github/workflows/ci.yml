@@ -89,11 +89,13 @@ jobs:
       - name: Check SSH port
         run: |
           echo "Checking SSH port on ${EC2_HOST}..."
-          if timeout 5 bash -c "cat < /dev/tcp/${EC2_HOST}/22" 2>/dev/null; then
-            echo "Port 22 open on ${EC2_HOST}";
+          sudo apt-get update -y
+          sudo apt-get install -y netcat-openbsd
+          if nc -z -w 5 "${EC2_HOST}" 22; then
+            echo "Port 22 is open on ${EC2_HOST}"
           else
-            echo "Port 22 appears closed/unreachable on ${EC2_HOST}. This will cause SSH to fail.";
-            exit 1;
+            echo "Port 22 appears closed/unreachable on ${EC2_HOST}"
+            exit 1
           fi
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
